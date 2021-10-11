@@ -6,8 +6,9 @@
         <?= $this->Form->control('line', ['label' => 'LineID']) ?>
         <?= $this->Form->control('group', [
             'label' => 'グループ',
-            'options' => [ 0 => '-選択してください-', 1 => '手登根家', 2 => '◯◯◯◯']
-        ]) ?>
+            'type' => 'select',
+            'options' => $group_array
+        ]); ?>
         <?= $this->Form->control('password', ['label' => 'パスワード']); ?>
 
    </fieldset>
