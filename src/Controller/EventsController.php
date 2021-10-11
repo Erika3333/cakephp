@@ -8,12 +8,16 @@ use Cake\Event\Event;
 
 class EventsController extends AppController
 {
+    public function initialize()
+    {
+        parent::initialize();
+    }
+
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
-        $this->Auth->allow(['add', 'index']);
+        $this->Auth->allow(['add', 'logout']);
     }
-
     public function index()
     {
         $this->loadComponent('EventSql');
@@ -55,7 +59,7 @@ class EventsController extends AppController
             $this->set('events', $events);
 
             return $this->redirect(
-                ['controller' => 'Events', 'action' => 'index']
+                ['controller' => 'Events', 'action' => 'calender']
             );
         }
     }
@@ -99,8 +103,8 @@ class EventsController extends AppController
         $calenderArray = [];
         $displayNumber = 0;
 
-        for( $dayLoop = $firstDate; $dayLoop <= $lastDate; $dayLoop++ ) {
-            if( $dayLoop == $firstDate ) {            
+        for($dayLoop = $firstDate; $dayLoop <= $lastDate; $dayLoop++) {
+            if($dayLoop == $firstDate ) {            
                 for( $weekNumber = 0; $weekNumber <= $firstWeekNumber-1; $weekNumber++ ) {
                     $displayNumber++;
                     $calenderArray[$displayNumber]['day'] = ''; 
@@ -111,30 +115,33 @@ class EventsController extends AppController
             $calenderArray[$displayNumber]['day'] = str_pad($dayLoop, 2, '0', STR_PAD_LEFT);
             $calenderArray[$displayNumber]['Y-m-d'] = $thisYear.'-'.$thisMonth.'-'.str_pad($dayLoop, 2, '0', STR_PAD_LEFT); 
         }
-
-        //　カレンダー ＋ イベント　配列作成
+       
+        //　カレンダー配列 ＋ イベント配列　
         $count = 0;
         $eventCalneder = [];
-        foreach($calenderArray as $calkey => $callender ) {
+        foreach($calenderArray as $calkey => $callender) {
             $count++;
-            $eventCalneder[$count] = $callender; 
-            foreach($events as $key => $event ) {   
-                // var_dump($event);        
-                if($callender['Y-m-d'] == $event['data']) {
-                    $eventCalneder[$count]['event'] = $event['title'];
-                    $eventCalneder[$count]['day'] = $callender['day'];
+            $eventCalneder[$count]['event'] = '';
+            $eventCalneder[$count]['day'] = $callender['day']; 
 
-                } else {
-                    $eventCalneder[$count]['event'] = '';
-                    $eventCalneder[$count]['day'] = $callender['day'];
+            $a = 0;
+            if($events) {
+                foreach($events as $key => $event) {
+                    if($callender['Y-m-d'] == $event['data']) {
+                        
+                        $a++;
+                        $eventCalneder[$count]['event'] = $event['title'];
+                        $eventCalneder[$count]['day'] = $callender['day'];
+                    }
                 }
             }
         }
 
+        $this->set('eventCalneder', $eventCalneder);
         $this->set('getDate', $getDate);
         $this->set('thisYear', $thisYear);
         $this->set('thisMonth', $thisMonth);
-        $this->set('eventCalneder', $eventCalneder);
+        
     }
 }
 

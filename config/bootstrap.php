@@ -75,6 +75,10 @@ try {
     exit($e->getMessage() . "\n");
 }
 
+if (isset($_ENV['CAKE_ENV'])) {
+    Configure::load('app_' . $_ENV['CAKE_ENV'], 'default');
+}
+
 /*
  * Load an environment local configuration file to provide overrides to your configuration.
  * Notice: For security reasons app_local.php will not be included in your git repo.
@@ -87,7 +91,8 @@ if (file_exists(CONFIG . 'app_local.php')) {
  * When debug = true the metadata cache should only last
  * for a short time.
  */
-if (Configure::read('debug')) {
+if (Configure::read('debug') && !isset($_ENV['CAKE_ENV'])) {
+    // Plugin::load('DebugKit', ['bootstrap' => true]);
     Configure::write('Cache._cake_model_.duration', '+2 minutes');
     Configure::write('Cache._cake_core_.duration', '+2 minutes');
     // disable router cache during development

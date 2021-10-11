@@ -54,12 +54,11 @@ class AppController extends Controller
             ],
             'loginRedirect' => [
                 'controller' => 'Events',
-                'action' => 'index'
+                'action' => 'calender'
             ],
             'logoutRedirect' => [
                 'controller' => 'Users',
                 'action' => 'login',
-                'home'
             ],
             'authenticate' => [
                 'Form' => [

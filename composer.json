@@ -12,6 +12,10 @@
         "mobiledetect/mobiledetectlib": "2.*"
     },
     "require-dev": {
+        "cakephp/cakephp": "dev-master",
+        "phpunit/phpunit": "*",
+        "cakephp/cakephp-codesniffer": "*",
+        "heroku/heroku-buildpack-php": "*",
         "cakephp/bake": "^1.9.0",
         "cakephp/cakephp-codesniffer": "^3.0",
         "cakephp/debug_kit": "^3.17.0",
@@ -37,16 +41,16 @@
     "scripts": {
         "post-install-cmd": "App\\Console\\Installer::postInstall",
         "post-create-project-cmd": "App\\Console\\Installer::postInstall",
-        // "post-autoload-dump": "Cake\\Composer\\Installer\\PluginInstaller::postAutoloadDump",
-        // "check": [
-        //     "@test",
-        //     "@cs-check"
-        // ],
-        // "cs-check": "phpcs --colors -p --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP src/ tests/ config/ webroot/",
-        // "cs-fix": "phpcbf --colors -p --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP src/ tests/ config/ webroot/",
-        // "stan": "phpstan analyse -l 5 src/",
-        // "stan-setup": "cp composer.json composer.backup && composer require --dev phpstan/phpstan-shim:^0.11 && mv composer.backup composer.json",
-        // "test": "phpunit --colors=always"
+        "post-autoload-dump": "Cake\\Composer\\Installer\\PluginInstaller::postAutoloadDump",
+        "check": [
+            "@test",
+            "@cs-check"
+        ],
+        "cs-check": "phpcs --colors -p --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP src/ tests/ config/ webroot/",
+        "cs-fix": "phpcbf --colors -p --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP src/ tests/ config/ webroot/",
+        "stan": "phpstan analyse -l 5 src/",
+        "stan-setup": "cp composer.json composer.backup && composer require --dev phpstan/phpstan-shim:^0.11 && mv composer.backup composer.json",
+        "test": "phpunit --colors=always"
     },
     "prefer-stable": true,
     "config": {

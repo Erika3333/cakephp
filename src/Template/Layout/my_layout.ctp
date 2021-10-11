@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,6 +21,7 @@
             <ul class="">
                 <li><a href="/events/calender">カレンダー</a></li>
                 <li><a href="/events/index">イベント一覧</a></li>
+                <li><a href="/users/logout">ログアウト</a></li>
             </ul>
         </div>
     </nav>
@@ -31,3 +33,4 @@
     </footer>
 </body>
 </html>
+
