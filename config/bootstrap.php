@@ -93,6 +93,7 @@ if (file_exists(CONFIG . 'app_local.php')) {
  */
 if (Configure::read('debug') && !isset($_ENV['CAKE_ENV'])) {
     // Plugin::load('DebugKit', ['bootstrap' => true]);
+    Plugin::load('DebugKit', ['bootstrap' => false]);
     Configure::write('Cache._cake_model_.duration', '+2 minutes');
     Configure::write('Cache._cake_core_.duration', '+2 minutes');
     // disable router cache during development
