@@ -3,9 +3,11 @@
     <?= $this->Form->create() ?>
     <fieldset>
     <legend><?= __('ユーザ名とパスワードを入力してください') ?></legend>
-    <?= $this->Form->control('username', ['label' => '名前']) ?>
+    <?= $this->Form->control('username', ['label' => 'ユーザー名']) ?>
     <?= $this->Form->control('password', ['label' => 'パスワード']) ?>
     </fieldset>
-    <?= $this->Form->button(__('ログイン')); ?>
+    
+    <a href="/users/add">新規登録はこちら</a>
+    <div class="text-right"><?= $this->Form->button(__('ログイン')); ?></div>
     <?= $this->Form->end() ?>
 </div>

@@ -42,22 +42,6 @@ class UsersController extends AppController
         }
     }
 
-    public function index()
-    {
-        $connection = ConnectionManager::get('default');
-        $users = $connection->execute('SELECT * FROM users')->fetchAll('assoc');
-
-        for($i = 0; $i < count($users); $i++) {
-            $user = $users[$i];
-        }
-
-        $today = date('Y/m/d');
-
-        $this->set('users', $users);
-        $this->set('today', $today);
-        $this->set('user', $user);
-    }
-
     public function logout()
     {
         return $this->redirect($this->Auth->logout());
@@ -86,4 +70,48 @@ class UsersController extends AppController
         $this->set(compact('user'));
     }
 
+    public function index()
+    {
+        $connection = ConnectionManager::get('default');
+        $users = $connection->execute('SELECT * FROM users')->fetchAll('assoc');
+
+        $userId = $this->Auth->user('user_id');
+        for($userLoop = 0; $userLoop < count($users); $userLoop++) {
+            if ($users[$userLoop]['user_id'] == $userId) {
+                $displayUser['userid'] = $users[$userLoop]['user_id'];
+                $displayUser['username'] = $users[$userLoop]['username'];
+                $displayUser['line'] = $users[$userLoop]['line'];
+            }
+        }
+        var_dump($displayUser);
+
+        $this->set('users', $users);
+        $this->set('displayUser', $displayUser);
+    }
+
+    public function edit()
+    {
+        $connection = ConnectionManager::get('default');
+        $users = $connection->execute('SELECT * FROM users')->fetchAll('assoc');
+
+        $userId = $this->Auth->user('user_id');
+        for($userLoop = 0; $userLoop < count($users); $userLoop++) {
+            if ($users[$userLoop]['user_id'] == $userId) {
+                $displayUser['userid'] = $users[$userLoop]['user_id'];
+                $displayUser['username'] = $users[$userLoop]['username'];
+                $displayUser['line'] = $users[$userLoop]['line'];
+            }
+        }
+
+        if ($this->request->is('post')) {
+            $getPost['username'] = $this->request->getData('username');
+            $getPost['line'] = $this->request->getData('line');
+            var_dump($getPost);
+        } else {
+            // return $this->redirect(['action' => 'index']);
+        }
+        
+
+        $this->set('displayUser', $displayUser);
+    }
 }

@@ -41,34 +41,5 @@ class EventSqlComponent extends Component
 
     public function eventAdd($getPost) {
 
-        // $eventData = '2021-10-10';
-        // $eventTitle = '10月タイトル';
-        // $eventComment = '10月コメント';
-        // $eventGroup = 1;
-        // $eventUserId = 1;
-
-
-        // $connection = ConnectionManager::get('default');
-        // $sql =  <<<SQL_TEXT
-        // INSERT INTO events
-        // VALUES
-        //     (nextval('events_event_id_seq'::regclass), 
-        //     :eventData, 
-        //     :eventTitle, 
-        //     :eventComment, 
-        //     :eventGroup, 
-        //     :eventUserId);
-        // SQL_TEXT;
-
-        // $event_db = $connection->prepare($sql);
-        // $event_db->bindValue(1, $eventData);
-        // $event_db->bindValue(2, $eventTitle);
-        // $event_db->bindValue(3, $eventComment);
-        // $event_db->bindValue(4, $eventGroup);
-        // $event_db->bindValue(5, $eventUserId);
-        // $event_db->execute();
-        // $events = $event_db->fetchAll('assoc');
-
-        // return $events;
     } 
 }

@@ -1,23 +1,25 @@
-
-<table>
-    <tr>
-        <th>UserID</th>
-        <th>UserName</th>
-        <th>UserLine</th>
-        <th>Usergroup</th>
-        <th>Userpassword</th>
-
-    </tr>
-    <?php for($i = 0; $i < count($users); $i++): ?>
-    <tr>
-        <td><?= $users[$i]['user_id']; ?></td>
-        <td><?= $users[$i]['username']; ?></td>
-        <td><?= $users[$i]['line']; ?></td>
-        <td><?= $users[$i]['group']; ?></td>
-        <td><?= $users[$i]['password']; ?></td>
-
-    </tr>
-    <?php endfor; ?>
-</table>
-
-
+<div class="users form row md-3 col-md-8 my-4">
+    <h3>ユーザー情報</h3>
+    <table>
+        <?= $this->Form->create(null, ['url' => ['controller' => 'Users', 'action' => 'edit'], 'type' => 'post'])?>
+        <tr>
+            <th>
+                <label>ユーザーID</label>
+            </th>
+            <th>
+                <?= $displayUser['userid']; ?>
+            </th>
+        </tr> 
+        <tr>
+            <th><label>ユーザー名</label></th>
+            <td><?= $displayUser['username']; ?></td>
+            <td><?= $this->Form->submit('変更',['name'=>'edit_username']);?></td>
+        </tr>
+        <tr>
+            <th><label>ライン</label></th>
+            <td><?= $displayUser['line']; ?></td>
+            <td><?= $this->Form->submit('変更',['name'=>'edit_line']);?></td>
+        </tr>
+            <?= $this->Form->end() ?>
+    </table>
+</div>

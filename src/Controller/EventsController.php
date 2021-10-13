@@ -23,17 +23,38 @@ class EventsController extends AppController
         $this->loadComponent('EventSql');
         $events = $this->EventSql->eventSql();
 
+        $this->loadComponent('UserSql');
+        $users = $this->UserSql->userSql();        
+
+        $display = [];
+        for ($eventLoop = 0; $eventLoop < count($events); $eventLoop++) {
+            $display[$eventLoop]['data'] = $events[$eventLoop]['data'];
+            $display[$eventLoop]['title'] = $events[$eventLoop]['title'];
+            $display[$eventLoop]['comment'] = $events[$eventLoop]['comment'];
+            $display[$eventLoop]['group'] = $events[$eventLoop]['group'];
+            $display[$eventLoop]['user_id'] = $events[$eventLoop]['user_id'];
+
+            for ($userLoop = 0 ; $userLoop < count($users); $userLoop++) {
+                
+                if( $events[$eventLoop]['user_id'] == $users[$userLoop]['user_id'] ) {
+                    $events[$eventLoop]['user_id'] = $users[$userLoop]['username'];
+                } 
+            }
+        }
+
         $this->set('events', $events);
     }
 
     public function add() 
     {
+        $userId = $this->Auth->user('user_id');
+
         if( $this->request->is('post') ) {
-            $getPost['data'] = $this->request->data('data');;
-            $getPost['title'] = $this->request->data('title');
-            $getPost['comment'] = $this->request->data('comment');
-            $getPost['group'] = $this->request->data('group');
-            $getPost['userId'] = 1;
+            $getPost['data'] = $this->request->getData('data');
+            $getPost['title'] = $this->request->getData('title');
+            $getPost['comment'] = $this->request->getData('comment');
+            $getPost['group'] = $this->request->getData('group');
+            $getPost['userId'] = $userId;
 
             $connection = ConnectionManager::get('default');
             $sql =  <<<SQL_TEXT
@@ -71,25 +92,15 @@ class EventsController extends AppController
         $this->loadComponent('EventSql');
         $events = $this->EventSql->eventSql();
 
-        $getDate = date('Y-m-d');
-        $postForm = $this->request->is('get');
-        $postlastMonth = $this->request->query('last_month');
-        $postNextMonth = $this->request->query('next_month');
-
-        // 先月または、翌月がポストされた時の処理
-        if (isset($postForm)) {
-            // 先月のボタンがクリックされたとき
-            if( $postlastMonth ) {
-                $getDate = date('Y-m-d', strtotime('-1 month'));
-            }
-            // 先月のボタンがクリックされたとき
-            if( $postNextMonth ) {
-                $getDate = date('Y-m-d', strtotime('+1 month'));
-            }
+        
+        $getDate = date('Y-m-d'); 
+        if( $this->request->is('get') && $this->request->getQuery('next_month')) {
+            $getDate = $this->request->getQuery('next_month');
+        }
+        if( $this->request->is('get') && $this->request->getQuery('last_month')) {
+            $getDate = $this->request->getQuery('last_month');
         }
 
-        // 1ヶ月カレンダー配列作成     
-        $getDate = date('Y-m-d'); 
         
         $thisYear = date('Y', strtotime($getDate));
         $thisMonth = date('m', strtotime($getDate));

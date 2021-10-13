@@ -12,15 +12,14 @@
 </head>
 <body>
     <nav class="top-bar expanded" data-topbar role="navigation">
-        <ul class="title-area large-3 medium-4 columns">
-            <li class="name">
-                <h1><a href="/events/calender">手登根.com</a></h1>
-            </li>
-        </ul>
         <div class="top-bar-section">
-            <ul class="">
+            <ul class="title-area large-3 medium-4 columns">
+                <li class="name">
+                    <h3><a href="/events/calender">手登根.com</a></h3>
+                </li>
                 <li><a href="/events/calender">カレンダー</a></li>
                 <li><a href="/events/index">イベント一覧</a></li>
+                <li><a href="/users/index">ユーザー情報</a></li>
                 <li><a href="/users/logout">ログアウト</a></li>
             </ul>
         </div>

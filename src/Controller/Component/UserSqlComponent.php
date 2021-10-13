@@ -18,6 +18,21 @@ class UserSqlComponent extends Component
     protected $_defaultConfig = [];
 
     public function userSql() {
- 
+        $userSql = [];
+
+        $connection = ConnectionManager::get('default');
+        $sql =  <<<SQL_TEXT
+        SELECT
+            users.user_id,
+            users.username,
+            users.line,
+            users.group,
+            users.role
+        FROM users
+        SQL_TEXT;
+        $user_db = $connection->prepare($sql);
+        $user_db->execute();
+        $users = $user_db->fetchAll('assoc');
+        return $users;
     } 
 }

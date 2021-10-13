@@ -3,16 +3,29 @@
         <div class="ctp-warning alert">
         <h3>イベントカレンダー</h3>
             <table>
-                <?= $this->Form->create(null, ["url" => ["controller" => "Events", "action" => "calender"], 'type' => 'get'])?>
+                <?= $this->Form->create(null,[
+                    'url' => [
+                        'controller' => 'Events', 
+                        'action' => 'calender'], 
+                        'type' => 'get']);
+                ?>
                 <tr>
                     <th colspan="2">
-                        <?= $this->Form->button("<<", ["name" => "last_month", "value"=>$getDate ]) ?>
+                        <?= $this->Form->button('前月',[
+                            'name' => 'last_month', 
+                            'value' => date('Y-m-01', strtotime($getDate . '-1 month'))
+                            ]);
+                        ?>
                     </th>
                     <th colspan="3" class="text-center">
                         <h3><?= $thisYear; ?>-<?= $thisMonth; ?></h3>
                     </th>
                     <th colspan="2">
-                        <?= $this->Form->button(">>", ["name" => "next_month", "value"=>$thisYear ]) ?>
+                        <?= $this->Form->button('翌月',[
+                            'name' => 'next_month', 
+                            'value' => date('Y-m-01', strtotime($getDate . '+1 month'))
+                            ]);
+                        ?>
                     </th>
                 </tr>
                 <tr>

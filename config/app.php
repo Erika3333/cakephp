@@ -281,13 +281,13 @@ return [
             //'password' => 'secret',
             //'database' => 'my_app',
 
-            // 'username' => 'my_app',
-            // 'password' => 'secret',
-            // 'database' => 'db',
+            'username' => 'my_app',
+            'password' => 'secret',
+            'database' => 'db',
 
-            'username' => 'nnhbbsydflwdux',
-            'password' => '1bdb61f535036ff510d4e4bfeafa2b49f23395f48a7afd22abf1a56982f5ff18',
-            'database' => 'd9a194016lcubo',
+            // 'username' => 'nnhbbsydflwdux',
+            // 'password' => '1bdb61f535036ff510d4e4bfeafa2b49f23395f48a7afd22abf1a56982f5ff18',
+            // 'database' => 'd9a194016lcubo',
 
             /*
              * You do not need to set this flag to use full utf-8 encoding (internal default since CakePHP 3.6).
