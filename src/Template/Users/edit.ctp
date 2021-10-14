@@ -1,5 +1,5 @@
 <div class="users form row md-3 col-md-8 my-4">
-    <h3>ユーザー情報編集</h3>
+    <h3>ユーザー情報編集　※作成中</h3>
     <table>
         <?= $this->Form->create(null, ['url' => ['controller' => 'Users', 'action' => 'edit'], 'type' => 'post'])?>
         <tr>

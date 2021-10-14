@@ -28,6 +28,7 @@ class UsersController extends AppController
     {
         parent::beforeFilter($event);
         $this->Auth->allow(['add', 'logout']);
+        
     }
 
     public function login()
@@ -83,7 +84,7 @@ class UsersController extends AppController
                 $displayUser['line'] = $users[$userLoop]['line'];
             }
         }
-        var_dump($displayUser);
+        // var_dump($displayUser);
 
         $this->set('users', $users);
         $this->set('displayUser', $displayUser);
@@ -106,7 +107,7 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $getPost['username'] = $this->request->getData('username');
             $getPost['line'] = $this->request->getData('line');
-            var_dump($getPost);
+            // var_dump($getPost);
         } else {
             // return $this->redirect(['action' => 'index']);
         }

@@ -92,7 +92,7 @@ class EventsController extends AppController
         $this->loadComponent('EventSql');
         $events = $this->EventSql->eventSql();
 
-        
+        // 1ヶ月カレンダー配列作成     
         $getDate = date('Y-m-d'); 
         if( $this->request->is('get') && $this->request->getQuery('next_month')) {
             $getDate = $this->request->getQuery('next_month');

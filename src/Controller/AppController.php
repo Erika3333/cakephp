@@ -66,6 +66,7 @@ class AppController extends Controller
                 ]
             ],
         ]);
+        $this->Auth->config('authError', false);
 
         /*
          * Enable the following component for recommended CakePHP security settings.
