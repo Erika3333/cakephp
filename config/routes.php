@@ -71,6 +71,7 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/evnets', ['controller' => 'Events', 'action' => 'index']);
     $routes->connect('/evnets/add', ['controller' => 'Events', 'action' => 'add']);
     $routes->connect('/evnets/calender', ['controller' => 'Events', 'action' => 'calender']);
+    $routes->connect('/evnets/delete', ['controller' => 'Events', 'action' => 'delete']);
 
 
     $routes->connect('/adminuser/add', ['controller' => 'Users', 'action' => 'add']);

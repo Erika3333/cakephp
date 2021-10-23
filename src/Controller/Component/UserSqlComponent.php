@@ -34,5 +34,6 @@ class UserSqlComponent extends Component
         $user_db->execute();
         $users = $user_db->fetchAll('assoc');
         return $users;
-    } 
+    }
+    
 }

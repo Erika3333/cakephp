@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Datasource\ConnectionManager;
+use Cake\Controller\Component;
 use Cake\Event\Event; 
 
 /**
@@ -53,10 +54,9 @@ class UsersController extends AppController
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
-            if ($this->Users->save($user)) {
-                
-                $this->Flash->success(__('登録完了！再度ログインしてください！'));
 
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('登録完了！再度ログインしてください！'));
                 return $this->redirect(['action' => 'login']);
             }
             $this->log(var_dump($user->errors(),true),LOG_DEBUG);
@@ -73,46 +73,32 @@ class UsersController extends AppController
 
     public function index()
     {
-        $connection = ConnectionManager::get('default');
-        $users = $connection->execute('SELECT * FROM users')->fetchAll('assoc');
-
         $userId = $this->Auth->user('user_id');
-        for($userLoop = 0; $userLoop < count($users); $userLoop++) {
-            if ($users[$userLoop]['user_id'] == $userId) {
-                $displayUser['userid'] = $users[$userLoop]['user_id'];
-                $displayUser['username'] = $users[$userLoop]['username'];
-                $displayUser['line'] = $users[$userLoop]['line'];
-            }
-        }
-        // var_dump($displayUser);
+        $displayUser = $this->Users->get($userId, [
+            'contain' => [],
+        ]);
 
-        $this->set('users', $users);
         $this->set('displayUser', $displayUser);
     }
 
     public function edit()
     {
-        $connection = ConnectionManager::get('default');
-        $users = $connection->execute('SELECT * FROM users')->fetchAll('assoc');
-
         $userId = $this->Auth->user('user_id');
-        for($userLoop = 0; $userLoop < count($users); $userLoop++) {
-            if ($users[$userLoop]['user_id'] == $userId) {
-                $displayUser['userid'] = $users[$userLoop]['user_id'];
-                $displayUser['username'] = $users[$userLoop]['username'];
-                $displayUser['line'] = $users[$userLoop]['line'];
+        $user = $this->Users->get($userId, [
+            'contain' => [],
+        ]);
+
+        if ($this->request->is('post') ) {
+            $user = $this->Users->patchEntity($user, $this->request->getData());
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('変更登録完了'));
+            } else {
+                $this->Flash->success(__('入力内容に誤りがあります。'));
             }
         }
-
-        if ($this->request->is('post')) {
-            $getPost['username'] = $this->request->getData('username');
-            $getPost['line'] = $this->request->getData('line');
-            // var_dump($getPost);
-        } else {
-            // return $this->redirect(['action' => 'index']);
-        }
         
+        // return $this->redirect(['action' => 'index']);
 
-        $this->set('displayUser', $displayUser);
+        $this->set('user', $user);
     }
 }

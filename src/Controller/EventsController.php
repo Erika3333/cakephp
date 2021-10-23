@@ -152,7 +152,33 @@ class EventsController extends AppController
         $this->set('getDate', $getDate);
         $this->set('thisYear', $thisYear);
         $this->set('thisMonth', $thisMonth);
-        
     }
+
+    // public function delete() {
+
+    //     $userId = $this->Auth->user('user_id');
+        
+    //     $this->loadComponent('EventSql');
+    //     $events = $this->EventSql->eventSql();
+
+    //     $this->viewBuilder()->setlayout('Events/index');
+
+    //     var_dump($events);
+    // }
+
+    public function delete($id = null)
+    {
+        $this->request->allowMethod(['post', 'delete']);
+        $user = $this->Users->get($id);
+        if ($this->Users->delete($user)) {
+            $this->Flash->success(__('The user has been deleted.'));
+        } else {
+            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+        }
+
+        return $this->redirect(['action' => 'index']);
+    }
+
+
 }
 

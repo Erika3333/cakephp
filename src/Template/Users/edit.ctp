@@ -7,18 +7,18 @@
                 <label>ユーザーID</label>
             </th>
             <th>
-                <?= $displayUser['userid']; ?>
+                <?= $user['user_id']; ?>
             </th>
         </tr> 
         <tr>
             <th>
                 <label>ユーザー名</label>
             </th>
-            <td>                
+            <td>
                 <?= $this->Form->control('', [
                     'type' => 'text', 
                     'name' => 'username', 
-                    'value' => $displayUser['username']
+                    'value' => $user['username']
                 ]);  ?>
             </td>
         </tr>
@@ -30,11 +30,11 @@
                 <?= $this->Form->control('', [
                     'type' => 'text', 
                     'name' => 'line', 
-                    'value' => $displayUser['line']
+                    'value' => $user['line']
                 ]);  ?>
             </td>
         </tr>
     </table>
-    <?= $this->Form->submit('変更',['name'=>'edit_line']);?>
+    <?= $this->Form->submit('変更登録',['name'=>'edit_line']);?>
     <?= $this->Form->end() ?>
 </div>
